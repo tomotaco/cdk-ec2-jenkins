@@ -3,6 +3,18 @@
 This project constructs EC2 instance with the latest Jenkins and Redis Stack installed.
 It contains the persistent EBS volume for Jenkins home and redis data directory.
 
+```mermaid
+architecture-beta
+    group aws(cloud)[AWS]
+
+    service db(database)[Redis Stack] in aws
+    service disk1(disk)[Persistent volume] in aws
+    service server(server)[Jenkins] in aws
+
+    db:L -- R:server
+    disk1:T -- B:server
+```
+
 ## Usage
 
 ### First deploy
@@ -71,3 +83,7 @@ Deploy again with the existing persistent snapshot:
 ```
 $ AWS_PROFILE=[YourAWSProfile] cdk deploy -c jenkinsPersistentSnapshotId=[SnapshotID]
 ```
+
+### Use redis from Jenkins pipeline script
+
+You can store JSON structure in Redis stack with JRedis Notifier plugin. (https://plugins.jenkins.io/redis-notifier/)
