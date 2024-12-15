@@ -67,7 +67,7 @@ $ ssh ec2-user@[PublicIPAddress] -i [YourKeyPair] sudo cat /var/lib/jenkins/secr
 ### Destroy the instance
 
 ```
-$ AWS_PROFILE=[YourAWSProfile] cdk dep;py
+$ AWS_PROFILE=[YourAWSProfile] cdk destroy
 ```
 
 Persistent EBS volume remains not destroyed. You can make EBS snapshot with AWSCLIv2:
